@@ -1,12 +1,12 @@
 <template>
 	<p>Hello, <strong></strong></p>
 </template>
-<script type="text/javascript">
+<script>
 
 (function(window,document){
 
 	var documentGlobalScope = document;
-	var documentToImport = (documentGlobalScope._currentScript || documentGlobalScope.currentScript)
+	var documentToImport = (documentGlobalScope._currentScript || documentGlobalScope.currentScript).ownerDocument
 	//busca un nodo en el html
 	var template = documentToImport.querySelector('template').content
 	//necesitamos crear el prototipo de nuestro elemento
@@ -16,26 +16,49 @@
 	//esta funcion es la que se va a encargar del comportamiento que exista cuando se inserte el nodo en el DOM
 	myElement.createdCallback = function(){
 
+		var shadowRoot = this.createShadowRoot()
+
 		//Se asocia al documento importador
 		clone = documentGlobalScope.importNode(template,true)
 
 		//va a agreagr ese template que creamos como clon
-		shadowRoot.appendChild(clone);
+		shadowRoot.appendChild(clone)
 
 		this.strong = shadowRoot.querySelector('strong')
 
 		if(this.hasAttribute('who'))
 		{
 			var who = this.getAttribute('who')
+			this.setWho(who)
+		}
+		else
+		{
+			this.setWho(this.who)
 		}
 
 	}
 
-	myElement.setWho = function(val){
+	myElement.attributeChangedCallback = function(attr,oldValue,newValue)
+	{
+		if(attr === 'who')
+		{
+			this.setWho(newValue)
+		}
+	}
+
+	myElement.setWho = function(val)
+	{
 		this.who = val
 		this.strong.textContent = this.who 
 	}
 
-})();
+
+	window.MyElement = documentGlobalScope.registerElement('header-comp',
+	{
+
+		prototype : myElement
+	})
+
+})(window, document);
 
 </script>
