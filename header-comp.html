@@ -1,0 +1,41 @@
+<template>
+	<p>Hello, <strong></strong></p>
+</template>
+<script type="text/javascript">
+
+(function(window,document){
+
+	var documentGlobalScope = document;
+	var documentToImport = (documentGlobalScope._currentScript || documentGlobalScope.currentScript)
+	//busca un nodo en el html
+	var template = documentToImport.querySelector('template').content
+	//necesitamos crear el prototipo de nuestro elemento
+	var myElement = Object.create(HTMLElement.prototype)
+	myElement.who = 'Nelsinho'
+
+	//esta funcion es la que se va a encargar del comportamiento que exista cuando se inserte el nodo en el DOM
+	myElement.createdCallback = function(){
+
+		//Se asocia al documento importador
+		clone = documentGlobalScope.importNode(template,true)
+
+		//va a agreagr ese template que creamos como clon
+		shadowRoot.appendChild(clone);
+
+		this.strong = shadowRoot.querySelector('strong')
+
+		if(this.hasAttribute('who'))
+		{
+			var who = this.getAttribute('who')
+		}
+
+	}
+
+	myElement.setWho = function(val){
+		this.who = val
+		this.strong.textContent = this.who 
+	}
+
+})();
+
+</script>
