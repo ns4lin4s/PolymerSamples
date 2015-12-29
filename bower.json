@@ -1,0 +1,19 @@
+{
+  "name": "CariApp",
+  "description": "App for teachers and students",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "Nelson Salinas G - ns4lin4s@gmail.com"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
