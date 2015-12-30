@@ -1,0 +1,25 @@
+<link rel="import" href="bower_components/polymer/polymer.html" />
+
+<dom-module id="say-hi">
+
+	<template>
+		<p>Hello, <strong>{{to}}</strong></p>
+	</template>
+</dom-module>
+<script>
+
+Polymer(
+	{
+		is:'say-hi',
+		properties:
+		{
+			to:
+			{
+				type: String,
+				value: ''
+			}
+		}
+	}
+)
+
+</script>
