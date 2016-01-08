@@ -88,6 +88,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <iron-icon icon="mail"></iron-icon>
             <span>Contact</span>
           </a>
+
+          <a data-route="map" href="{{baseUrl}}map">
+            <iron-icon icon="star"></iron-icon>
+            <span>Map</span>
+          </a>
+
         </paper-menu>
       </paper-scroll-header-panel>
 
@@ -175,6 +181,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <paper-material elevation="1">
                 <h2 class="page-title">Contact</h2>
                 <p>This is the contact section</p>
+              </paper-material>
+            </section>
+
+            <section data-route="map">
+              <paper-material elevation="1">
+                <style>
+                  google-map {
+                    height: 600px;
+                  }
+                </style>
+                <google-map latitude="37.77493" longitude="-122.41942"></google-map>
               </paper-material>
             </section>
 
